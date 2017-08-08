@@ -1,26 +1,10 @@
-const students = [
-  { name: 'Lorenzo',
-    picture: './assets/1.png',
-    classId: 9,
-    currentColor: 'green',
-    evaluations: [
-      {date: Date('2017-08-08'), color: 'yellow', remark: 'Boring' },
-      {date: Date('2017-08-09'), color: 'red', remark: 'Lazy' },
-      {date: Date('2017-08-10'), color: 'red', remark: 'Stupid' },
-    ]
-  },
-  { name: 'Tobia',
-    picture: './assets/2.jpeg',
-    classId: 9,
-    currentColor: 'green',
-    evaluations: [
-      {date: Date('2017-08-08'), color: 'yellow', remark: 'Boring' },
-      {date: Date('2017-08-09'), color: 'yellow', remark: 'Lazy' },
-      {date: Date('2017-08-10'), color: 'green' },
-    ]
-  },
-]
+import { FETCHED_STUDENTS } from '../actions/fetch'
 
-export default (state = students, {type, payload} = {}) => {
-  return state
+export default (state = [], {type, payload} = {}) => {
+  switch (type) {
+    case FETCHED_STUDENTS :
+      return state.concat(payload) // doublecheck this
+    default :
+      return state
+  }
 }
