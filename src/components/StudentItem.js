@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Evaluation from './Evaluation'
+import { Link } from 'react-router'
 
-export default class RecipeItem extends PureComponent {
+export default class StudentItem extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
@@ -15,12 +16,14 @@ export default class RecipeItem extends PureComponent {
   }
 
   render() {
-    const { name, picture, currentColor, evaluations } = this.props
+    const { _id, name, picture, currentColor, evaluations } = this.props
 
     return(
       <div className="student">
-        <span>{ picture }</span>
-        <h3>{ name }</h3>
+        <div className="cover" style={{ backgroundImage: `url(${picture})` }}></div>
+        <h3>
+          <Link to={`/students/${_id}`}>{ name }</Link>
+        </h3>
         <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
       </div>
