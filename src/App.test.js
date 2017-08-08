@@ -4,7 +4,7 @@ import App from './App';
 import { shallow } from 'enzyme'
 import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
-import Title from './components/Title'
+import Class from './components/Class'
 
 chai.use(chaiEnzyme())
 
@@ -21,10 +21,6 @@ describe('<App />', () => {
   })
 
   it('contains a Title', () => {
-    expect(app).to.have.descendants(Title)
-  })
-
-  it('sets the Title to "Batch" + number', () => {
-    expect(app).to.contain(<Title content="Batch #9" />)
+    expect(app).to.have.descendants(Class)
   })
 })

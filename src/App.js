@@ -1,15 +1,18 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import logo from './logo.svg'
-import Title from './components/Title'
+import Class from './components/Class'
 import './App.css'
 
-class App extends Component {
+class App extends PureComponent {
+  updateStudent (id, update) {
+     // something
+  }
 
   render() {
     return (
       <div className="App">
           <img src={logo} className="App-logo" alt="logo" />
-          <Title content='Batch #9' />
+          <Class updateStudent={ this.updateStudent.bind(this) } />
       </div>
     );
   }
