@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Evaluation from './Evaluation'
 
 export default class RecipeItem extends PureComponent {
   static propTypes = {
@@ -10,13 +11,7 @@ export default class RecipeItem extends PureComponent {
     }
 
   renderEvaluations (evaluation, index) {
-    return (
-      <ul>
-        <li>{ evaluation.date }</li>
-        <li>{ evaluation.color }</li>
-        <li>{ evaluation.remark }</li>
-      </ul>
-    )
+    return <Evaluation key={index} { ...evaluation } />
   }
 
   render() {
@@ -26,7 +21,7 @@ export default class RecipeItem extends PureComponent {
       <div className="student">
         <span>{ picture }</span>
         <h3>{ name }</h3>
-        <p className='currentColor'>{ currentColor }</p>
+        <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
       </div>
     )
