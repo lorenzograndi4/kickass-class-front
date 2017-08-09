@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import fetchStudents from '../actions/fetch'
 import Title from './Title'
 import Evaluation from './Evaluation'
+import deleteStudent from '../actions/delete'
+import DeleteButton from './DeleteButton'
 import { Link } from 'react-router'
 import './StudentPage.css'
 
@@ -19,6 +21,11 @@ export class StudentPage extends PureComponent {
   componentWillMount() {
     const { _id, fetchStudents } = this.props
     if (!_id) fetchStudents()
+  }
+
+  deleteThisStudent() {
+    const { _id, deleteStudent } = this.props
+    deleteStudent(_id)
   }
 
   renderEvaluations (evaluation, index) {
@@ -38,6 +45,7 @@ export class StudentPage extends PureComponent {
       >
         <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
         <Title content={ name } />
+        <DeleteButton onChange={ this.deleteThisStudent.bind(this) } />
         <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
         <div className='footer'>
@@ -61,4 +69,4 @@ const mapStateToProps = ({ students },{ params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchStudents })(StudentPage)
+export default connect(mapStateToProps, { fetchStudents, deleteStudent })(StudentPage)

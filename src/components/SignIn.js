@@ -30,7 +30,6 @@ export class SignIn extends PureComponent {
       password: this.refs.password.value
     }
     this.props.signIn(user)
-    console.log(user)
   }
 
   render() {
