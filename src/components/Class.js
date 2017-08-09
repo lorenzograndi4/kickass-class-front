@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Title from './Title'
 import StudentItem from './StudentItem'
 import fetchStudents from '../actions/fetch'
+import AskButton from './AskButton'
+import askQuestion from '../actions/ask'
 
 class Class extends PureComponent {
   static propTypes = {
@@ -15,6 +17,11 @@ class Class extends PureComponent {
     this.props.fetchStudents()
   }
 
+  nowAskQuestion () {
+    const { askQuestion } = this.props // will have to pass the _id for the class
+    askQuestion()
+  }
+
   renderStudent(student, index) {
     return <StudentItem key={index} { ...student } />
   }
@@ -23,6 +30,7 @@ class Class extends PureComponent {
     return(
       <div className="students wrapper">
         <header>
+          <AskButton className='primary btn' onChange={this.nowAskQuestion.bind(this)} />
           <Title content="This is batch #9" />
         </header>
 
@@ -38,4 +46,4 @@ const mapStateToProps = ({students}) => ({
   students
 })
 
-export default connect(mapStateToProps, { fetchStudents })(Class)
+export default connect(mapStateToProps, { fetchStudents, askQuestion })(Class)
