@@ -33,7 +33,7 @@ export class StudentPage extends PureComponent {
 
     return(
       <div className="student-page">
-        <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
+        <div className='cover' style={{ backgroundImage: `url(${ PLACEHOLDER })` }} />
         <Title content={ name } />
         <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
