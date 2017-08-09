@@ -6,6 +6,7 @@ import StudentItem from './StudentItem'
 import fetchStudents from '../actions/fetch'
 import AskButton from './AskButton'
 import askQuestion from '../actions/ask'
+import NewStudentForm from './NewStudentForm'
 
 class Class extends PureComponent {
   static propTypes = {
@@ -35,6 +36,7 @@ class Class extends PureComponent {
         </header>
 
         <main>
+          <NewStudentForm />
           { this.props.students.map(this.renderStudent) }
         </main>
       </div>

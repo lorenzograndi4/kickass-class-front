@@ -8,7 +8,7 @@ const PLACEHOLDER = 'https://dummyimage.com/160x160/858585/ffffff.jpg&text=pictu
 export default class StudentItem extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
+    picture: PropTypes.string,
     currentColor: PropTypes.string.isRequired,
     evaluations: PropTypes.array,
     }

@@ -2,7 +2,7 @@ import API from '../api'
 import { LOAD_ERROR } from './loading'
 import { history } from '../store'
 
-export const DELETED_STUDENT = 'DELETED_STUDENT'
+export const STUDENT_DELETED = 'STUDENT_DELETED'
 
 const api = new API()
 
@@ -17,7 +17,7 @@ export default (studentId) => {
               .then((result) => {
                 console.log(result)
                 dispatch({
-                  type: DELETED_STUDENT,
+                  type: STUDENT_DELETED,
                   payload: result
                 })
                 history.push('/')
