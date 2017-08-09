@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Evaluation from './Evaluation'
 import { Link } from 'react-router'
 
-const PLACEHOLDER = 'http://via.placeholder.com/160x160?text=WUT' // style={{ backgroundImage: `url(${ picture || PLACEHOLDER })` }}
+const PLACEHOLDER = 'https://dummyimage.com/160x160/858585/ffffff.jpg&text=picture' // style={{ backgroundImage: `url(${ picture || PLACEHOLDER })` }}
 
 export default class StudentItem extends PureComponent {
   static propTypes = {
