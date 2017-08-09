@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { replace } from 'react-router-redux'
 import { history } from '../store'
 import signIn from '../actions/sign-in'
 import Title from './Title'
@@ -12,9 +13,8 @@ export class SignIn extends PureComponent {
   }
 
   componentWillMount() {
-    if (this.props.signedIn) {
-      history.replace('/')
-    }
+    const { replace, signedIn } = this.props
+    if (signedIn) replace('/')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,11 +24,11 @@ export class SignIn extends PureComponent {
   }
 
   submitForm(event) {
-    const user = {
-      email: this.refs.email.getValue(),
-      password: this.refs.password.getValue()
-    }
     event.preventDefault()
+    const user = {
+      email: this.refs.email.value,
+      password: this.refs.password.value
+    }
     this.props.signIn(user)
     console.log(user)
   }
@@ -43,7 +43,7 @@ export class SignIn extends PureComponent {
             <input ref="email" type="text" defaultValue="teacher@codaisseur.com" />
           </div>
           <div className="input">
-            <input ref="password" type="text" defaultValue="codaisseur1"  />
+            <input ref="password" type="text" defaultValue="codaisseur1" />
           </div>
           <button onClick={ this.submitForm.bind(this) } label="Sign in">
             Sign in
@@ -58,4 +58,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser
 })
 
-export default connect(mapStateToProps, { signIn })(SignIn)
+export default connect(mapStateToProps, { signIn, replace })(SignIn)
