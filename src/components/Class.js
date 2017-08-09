@@ -1,9 +1,20 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Title from './Title'
 import StudentItem from './StudentItem'
+import fetchStudents from '../actions/fetch'
 
 class Class extends PureComponent {
+  static propTypes = {
+    students: PropTypes.array.isRequired,
+    fetchStudents: PropTypes.func.isRequired
+  }
+
+  componentWillMount () {
+    this.props.fetchStudents()
+  }
+
   renderStudent(student, index) {
     return <StudentItem key={index} { ...student } />
   }
@@ -27,4 +38,4 @@ const mapStateToProps = ({students}) => ({
   students
 })
 
-export default connect(mapStateToProps)(Class)
+export default connect(mapStateToProps, { fetchStudents })(Class)
