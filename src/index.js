@@ -8,7 +8,6 @@ import App from './App'
 import SignIn from './components/SignIn'
 import StudentPage from './components/StudentPage'
 import Class from './components/Class'
-// import SignIn from './components/SignIn'
 import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
