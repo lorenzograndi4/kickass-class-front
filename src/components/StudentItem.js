@@ -25,7 +25,7 @@ export default class StudentItem extends PureComponent {
         className="student"
         style={{ backgroundColor: `${ currentColor }` }}
       >
-        <div className="cover" style={{ backgroundImage: `url(${PLACEHOLDER})` }}></div>
+        <div className="cover" style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }}></div>
         <h3>
           <Link to={`/students/${_id}`}>{ name }</Link>
         </h3>

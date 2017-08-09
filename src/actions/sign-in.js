@@ -20,7 +20,7 @@ export default (user) => {
           payload: user
         })
 
-        history.push('/')
+        // history.push('/') // already in the component as 'will receive props'
 
       })
       .catch((error) => {

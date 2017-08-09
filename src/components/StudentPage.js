@@ -32,8 +32,11 @@ export class StudentPage extends PureComponent {
     if (!_id) return null
 
     return(
-      <div className="student-page">
-        <div className='cover' style={{ backgroundImage: `url(${PLACEHOLDER})` }} />
+      <div
+        className="student-page"
+        style={{ backgroundColor: `${ currentColor }` }}
+      >
+        <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
         <Title content={ name } />
         <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
