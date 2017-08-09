@@ -1,5 +1,4 @@
 import API from '../api'
-import { history } from '../store'
 import LOAD_ERROR from './loading'
 
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
@@ -7,7 +6,6 @@ export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 const api = new API()
 
 export default (user) => {
-  console.log(user)
   return (dispatch) => {
 
     api.authenticate(user)
@@ -20,7 +18,7 @@ export default (user) => {
           payload: user
         })
 
-        history.push('/')
+        // history.push('/') // already in the component as 'will receive props'
 
       })
       .catch((error) => {

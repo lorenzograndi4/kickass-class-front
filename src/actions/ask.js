@@ -6,14 +6,16 @@ export const QUESTION_ASKED = 'QUESTION_ASKED'
 
 const api = new API()
 
-export default () => { // will pass classId
+export default (query) => { // will pass classId
   return (dispatch) => {
 
     const backend = api.service('students')
 
     api.app.authenticate()
       .then(() => {
-        backend.get() // will pass classId
+        backend.find(
+          query: { ask: true }
+        ) // will pass classId
           .then((result) => {
 
             dispatch({
