@@ -21,7 +21,10 @@ export default class StudentItem extends PureComponent {
     const { _id, name, picture, currentColor, evaluations } = this.props
 
     return(
-      <div className="student">
+      <div
+        className="student"
+        style={{ backgroundColor: `${ currentColor }` }}
+      >
         <div className="cover" style={{ backgroundImage: `url(${PLACEHOLDER})` }}></div>
         <h3>
           <Link to={`/students/${_id}`}>{ name }</Link>

@@ -5,11 +5,13 @@ class Evaluation extends PureComponent {
     const { date, color, remark } = this.props
 
     return(
-      <div className="evaluation">
+      <div
+        className="evaluation"
+        style={{ backgroundColor: `${ color }` }}
+      >
         <ul>
-          <li>{ color }</li>
-          <li>{ date.slice(0, 10) }</li>
-          <li>{ remark }</li>
+          <li>Date: { date.slice(0, 10) }</li>
+          <li>Remark: { remark }</li>
         </ul>
       </div>
     )
