@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import './App.css'
+import Navigation from './components/Navigation'
 
 class App extends PureComponent {
   updateStudent (id, update) {
@@ -8,8 +9,11 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div className="App">
-        { this.props.children }
+      <div>
+        <Navigation />
+        <div className="App">
+          { this.props.children }
+        </div>
       </div>
     );
   }
