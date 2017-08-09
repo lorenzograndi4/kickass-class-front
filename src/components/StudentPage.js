@@ -7,7 +7,7 @@ import Evaluation from './Evaluation'
 import { Link } from 'react-router'
 import './StudentPage.css'
 
-const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
+const PLACEHOLDER = 'http://via.placeholder.com/160x160?text=WUT' // style={{ backgroundImage: `url(${ picture || PLACEHOLDER })` }}
 
 export class StudentPage extends PureComponent {
   static propTypes = {
@@ -33,9 +33,8 @@ export class StudentPage extends PureComponent {
 
     return(
       <div className="student-page">
-        <img src={ picture } alt='cover' />
+        <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
         <Title content={ name } />
-        <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER })` }} />
         <p className='currentColor'>Currently: { currentColor }</p>
         { evaluations.map(this.renderEvaluations) }
         <div className='footer'>

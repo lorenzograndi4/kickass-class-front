@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import store, { history } from './store'
-import './index.css';
-import App from './App';
+import './index.css'
+import App from './App'
 import StudentPage from './components/StudentPage'
 import Class from './components/Class'
-import registerServiceWorker from './registerServiceWorker';
+// import SignIn from './components/SignIn'
+import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <Provider store={store}>

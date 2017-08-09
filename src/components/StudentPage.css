@@ -1,9 +1,6 @@
 .cover {
    height: 160px;
-   background-size: cover;
-   background-position: center center;
-}
-
-img {
-  height: 160px;
+   width: 160px;
+   display: block;
+   margin: auto;
 }

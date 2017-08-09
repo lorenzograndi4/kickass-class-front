@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Evaluation from './Evaluation'
 import { Link } from 'react-router'
 
+const PLACEHOLDER = 'http://via.placeholder.com/160x160?text=WUT' // style={{ backgroundImage: `url(${ picture || PLACEHOLDER })` }}
+
 export default class StudentItem extends PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -20,7 +22,7 @@ export default class StudentItem extends PureComponent {
 
     return(
       <div className="student">
-        <div className="cover" style={{ backgroundImage: `url(${picture})` }}></div>
+        <div className="cover" style={{ backgroundImage: `url(${PLACEHOLDER})` }}></div>
         <h3>
           <Link to={`/students/${_id}`}>{ name }</Link>
         </h3>
