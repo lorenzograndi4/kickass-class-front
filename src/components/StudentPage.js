@@ -28,18 +28,25 @@ export class StudentPage extends PureComponent {
     if (!_id) fetchStudents()
   }
 
-  // shouldComponentUpdate(nextProps) {
-  // }
-  //
-  // componentWillUpdate() {
-  //   const { _id, fetchStudents, evaluate } = this.props
-  //   if (!_id) fetchStudents()
-  //   evaluate()
-  // }
-
   deleteThisStudent() {
     const { _id, deleteStudent } = this.props
     deleteStudent(_id)
+  }
+
+  findNext() {
+    const students = this.props.students
+    const thisStudent = students.reduce((prev, next) => {
+      if (next._id === this.props.params.studentId) {
+        return next
+      }
+      return prev
+    }, {})
+
+    const thisIndex = students.indexOf(thisStudent)
+    console.log(thisIndex, thisStudent)
+    const nextStudent = students[thisIndex + 1];
+
+    return nextStudent
   }
 
   renderEvaluations (evaluation, index) {
@@ -48,7 +55,6 @@ export class StudentPage extends PureComponent {
 
   render() {
     const { _id, name, picture, currentColor, evaluations } = this.props
-    console.log(this.props)
 
     if (!_id) return null
 
@@ -68,7 +74,7 @@ export class StudentPage extends PureComponent {
           <DeleteButton onChange={ this.deleteThisStudent.bind(this) } />
           <p className='currentColor'>Currently: { currentColor }</p>
           { evaluationsByDate.map(this.renderEvaluations) }
-          <EvaluationForm studentId={ this.props._id} />
+          <EvaluationForm studentId={ this.props._id } nextStudent={ this.findNext() } />
         </div>
         <Link to={'/'}>Back to the Class</Link>
       </div>
@@ -86,8 +92,8 @@ const mapStateToProps = ({ students },{ params }) => {
   }, {})
 
   return {
-    ...student
-  }
+    ...student, students
+  } // this is the money shot!
 }
 
 export default connect(mapStateToProps, { fetchStudents, deleteStudent })(StudentPage)

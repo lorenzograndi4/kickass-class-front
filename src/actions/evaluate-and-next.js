@@ -2,11 +2,11 @@ import API from '../api'
 import { LOAD_ERROR } from './loading'
 import { history } from '../store'
 
-export const EVALUATION_CREATED = 'EVALUATION_CREATED'
+export const EVALUATION_AND_NEXT = 'EVALUATION_AND_NEXT'
 
 const api = new API()
 
-export default (studentId, evaluation) => {
+export default (studentId, evaluation, nextStudent) => {
   return (dispatch) => {
 
         const backend = api.service('students')
@@ -19,10 +19,10 @@ export default (studentId, evaluation) => {
               .then((result) => {
                 console.log('result', result)
                 dispatch({
-                  type: EVALUATION_CREATED,
+                  type: EVALUATION_AND_NEXT,
                   payload: result
                 })
-                history.push('/')
+                history.push(`/students/${nextStudent._id}`)
               })
               .catch((error) => {
                 dispatch({
