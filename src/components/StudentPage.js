@@ -6,7 +6,6 @@ import Title from './Title'
 import Evaluation from './Evaluation'
 import deleteStudent from '../actions/delete'
 import DeleteButton from './DeleteButton'
-import evaluate from '../actions/evaluate'
 import EvaluationForm from './EvaluationForm'
 import { Link } from 'react-router'
 import './StudentPage.css'
@@ -28,6 +27,7 @@ export class StudentPage extends PureComponent {
     const { _id, fetchStudents } = this.props
     if (!_id) fetchStudents()
   }
+
   // shouldComponentUpdate(nextProps) {
   // }
   //
@@ -42,11 +42,6 @@ export class StudentPage extends PureComponent {
     deleteStudent(_id)
   }
 
-  newEvaluation() {
-    const { _id, evaluate } = this.props
-    evaluate(_id)
-  }
-
   renderEvaluations (evaluation, index) {
     return <Evaluation key={index} { ...evaluation } />
   }
@@ -56,6 +51,10 @@ export class StudentPage extends PureComponent {
     console.log(this.props)
 
     if (!_id) return null
+
+    const evaluationsByDate = evaluations.sort((a, b) => {
+      return parseInt(b.date, 10) - parseInt(a.date, 10)
+    });
 
     return(
       <div className='wrapper'>
@@ -68,8 +67,8 @@ export class StudentPage extends PureComponent {
           <Title content={ name } />
           <DeleteButton onChange={ this.deleteThisStudent.bind(this) } />
           <p className='currentColor'>Currently: { currentColor }</p>
-          { evaluations.map(this.renderEvaluations) }
-          <EvaluationForm onChange={ this.newEvaluation.bind(this) } />
+          { evaluationsByDate.map(this.renderEvaluations) }
+          <EvaluationForm studentId={ this.props._id} />
         </div>
         <Link to={'/'}>Back to the Class</Link>
       </div>
@@ -91,4 +90,4 @@ const mapStateToProps = ({ students },{ params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchStudents, deleteStudent, evaluate })(StudentPage)
+export default connect(mapStateToProps, { fetchStudents, deleteStudent })(StudentPage)

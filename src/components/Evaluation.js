@@ -10,7 +10,7 @@ class Evaluation extends PureComponent {
         style={{ backgroundColor: `${ color }` }}
       >
         <ul>
-          <li>Date: { date.slice(0, 10) }</li>
+          <li>Date: { date }</li>
           <li>Remark: { remark }</li>
         </ul>
       </div>
