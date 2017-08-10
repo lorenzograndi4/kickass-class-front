@@ -22,6 +22,7 @@ export class Navigation extends PureComponent {
           <li><Link to="/">Home</Link></li>
           <li>
             { signedIn ?
+              // eslint-disable-next-line
               <a href="#" onClick={this.signOut.bind(this)}>Sign out</a> :
               <Link to="/sign-in">Sign in</Link>
             }
