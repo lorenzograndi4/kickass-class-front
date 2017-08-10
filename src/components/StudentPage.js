@@ -6,10 +6,11 @@ import Title from './Title'
 import Evaluation from './Evaluation'
 import deleteStudent from '../actions/delete'
 import DeleteButton from './DeleteButton'
+import EvaluationForm from './EvaluationForm'
 import { Link } from 'react-router'
 import './StudentPage.css'
 
-const PLACEHOLDER = 'https://dummyimage.com/160x160/858585/ffffff.jpg&text=picture' // style={{ backgroundImage: `url(${ picture || PLACEHOLDER })` }}
+const PLACEHOLDER = 'https://dummyimage.com/160x160/858585/ffffff.jpg&text=picture'
 
 export class StudentPage extends PureComponent {
   static propTypes = {
@@ -22,6 +23,19 @@ export class StudentPage extends PureComponent {
     const { _id, fetchStudents } = this.props
     if (!_id) fetchStudents()
   }
+  componentDidUpdate() {
+    const { _id, fetchStudents } = this.props
+    if (!_id) fetchStudents()
+  }
+
+  // shouldComponentUpdate(nextProps) {
+  // }
+  //
+  // componentWillUpdate() {
+  //   const { _id, fetchStudents, evaluate } = this.props
+  //   if (!_id) fetchStudents()
+  //   evaluate()
+  // }
 
   deleteThisStudent() {
     const { _id, deleteStudent } = this.props
@@ -38,25 +52,32 @@ export class StudentPage extends PureComponent {
 
     if (!_id) return null
 
+    const evaluationsByDate = evaluations.sort((a, b) => {
+      return parseInt(b.date, 10) - parseInt(a.date, 10)
+    });
+
     return(
-      <div
-        className="student-page"
-        style={{ backgroundColor: `${ currentColor }` }}
-      >
-        <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
-        <Title content={ name } />
-        <DeleteButton onChange={ this.deleteThisStudent.bind(this) } />
-        <p className='currentColor'>Currently: { currentColor }</p>
-        { evaluations.map(this.renderEvaluations) }
-        <div className='footer'>
-          <Link to={'/'}>Back to the Class</Link>
+      <div className='wrapper'>
+
+        <div
+          className="student-page"
+          style={{ backgroundColor: `${ currentColor }` }}
+        >
+          <div className='cover' style={{ backgroundImage: `url(${picture || PLACEHOLDER})` }} />
+          <Title content={ name } />
+          <DeleteButton onChange={ this.deleteThisStudent.bind(this) } />
+          <p className='currentColor'>Currently: { currentColor }</p>
+          { evaluationsByDate.map(this.renderEvaluations) }
+          <EvaluationForm studentId={ this.props._id} />
         </div>
+        <Link to={'/'}>Back to the Class</Link>
       </div>
     )
   }
 }
 
 const mapStateToProps = ({ students },{ params }) => {
+  // const student = students.filter((g) => { return g._id === params.studentId })[0]
   const student = students.reduce((prev, next) => {
     if (next._id === params.studentId) {
       return next

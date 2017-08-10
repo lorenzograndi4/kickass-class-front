@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Title from './Title'
 import StudentItem from './StudentItem'
 import fetchStudents from '../actions/fetch'
+import evaluate from '../actions/evaluate'
 import AskButton from './AskButton'
 import askQuestion from '../actions/ask'
 import NewStudentForm from './NewStudentForm'
@@ -48,4 +49,4 @@ const mapStateToProps = ({students}) => ({
   students
 })
 
-export default connect(mapStateToProps, { fetchStudents, askQuestion })(Class)
+export default connect(mapStateToProps, { fetchStudents, evaluate, askQuestion })(Class)
