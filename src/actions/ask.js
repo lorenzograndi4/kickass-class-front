@@ -24,9 +24,10 @@ export default (query) => { // will pass classId
             const greenStudents = result.data.filter((student) => {return student.currentColor === 'green';});
             const yellowStudents = result.data.filter((student) => {return student.currentColor === 'yellow';});
             const redStudents = result.data.filter((student) => {return student.currentColor === 'red';});
+
             function pickStudentFromGroup(array) {return array[Math.floor(Math.random() * array.length)];}
 
-            const randomStudent = function () {
+            function findRandomStudent() {
               var number = Math.floor(Math.random() * 100 + 1);
               switch (true) {
               case (number < 51) :
@@ -40,9 +41,7 @@ export default (query) => { // will pass classId
               }
             }
 
-            console.log(randomStudent)
-            debugger;
-            history.push(`/students/${randomStudent._id}`)
+            history.push(`/students/${findRandomStudent()._id}`)
           })
           .catch((error) => {
 
