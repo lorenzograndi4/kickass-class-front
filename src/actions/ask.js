@@ -13,17 +13,35 @@ export default (query) => { // will pass classId
 
     api.app.authenticate()
       .then(() => {
-        backend.find(
-          query: { ask: true }
-        ) // will pass classId
+        backend.find() // will pass classId
           .then((result) => {
 
             dispatch({
               type: QUESTION_ASKED,
               payload: result
             })
-            console.log(result)
-            history.push(`/students/${result._id}`)
+
+            const greenStudents = result.data.filter((student) => {return student.currentColor === 'green';});
+            const yellowStudents = result.data.filter((student) => {return student.currentColor === 'yellow';});
+            const redStudents = result.data.filter((student) => {return student.currentColor === 'red';});
+
+            function pickStudentFromGroup(array) {return array[Math.floor(Math.random() * array.length)];}
+
+            function findRandomStudent() {
+              var number = Math.floor(Math.random() * 100 + 1);
+              switch (true) {
+              case (number < 51) :
+                return pickStudentFromGroup(redStudents);
+              case (number < 84) :
+                return pickStudentFromGroup(yellowStudents);
+              case (number > 83) :
+                return pickStudentFromGroup(greenStudents);
+              default :
+                return 'Oh boy something went wrong';
+              }
+            }
+
+            history.push(`/students/${findRandomStudent()._id}`)
           })
           .catch((error) => {
 
